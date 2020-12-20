@@ -3,6 +3,8 @@
  */
 package com.start.flights.api;
 
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * @author Jordf
  *
@@ -10,5 +12,5 @@ package com.start.flights.api;
 
 @RestController
 public class FlightController {
-
+	
 }

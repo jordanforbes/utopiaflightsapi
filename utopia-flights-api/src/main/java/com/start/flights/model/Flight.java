@@ -7,8 +7,6 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.h2.util.DateTimeUtils;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

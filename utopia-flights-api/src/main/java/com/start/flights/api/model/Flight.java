@@ -3,6 +3,7 @@
  */
 package com.start.flights.api.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -22,40 +24,51 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @Table(name="tbl_flight")
-public class Flight {
+public class Flight implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
+	@Column(name="flightid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private  int id;
 	
 	//converts sql DATETIME to Java LocalDateTime
-	@Column(name="DEPARTTIME")
-	@JsonDeserialize(using=LocalDateDeserializer.class)
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@Column(name="departtime")
+	@JsonProperty("departTime")
 	private LocalDateTime departTime;
 	
-	@Column(name="SEATSAVAILABLE")
+	@Column(name="seatsavailable")
+	@JsonProperty("seatsAvailable")
 	private int seatsAvailable;
 	
-	@Column(name="PRICE")
+	@Column(name="price")
+	@JsonProperty("price")
 	private float price;
 	
-	@Column(name="DEPARTCITY")
+	@Column(name="departcityid")
+	@JsonProperty("departCity")
 	private int departCity;
 	
-	@Column(name="ARRIVECITY")
+	@Column(name="arrivecityid")
+	@JsonProperty("arriveCity")
 	private int arriveCity;
 	
 	public Flight() {
 		super();
 	}
 	
-	public Flight(@JsonProperty("id") int id,
-				  @JsonProperty("departTime") LocalDateTime departTime,
-				  @JsonProperty("seatsAvailable") int seatsAvailable,
-				  @JsonProperty("price") float price,
-				  @JsonProperty("departCity") int departCity,
-				  @JsonProperty("arriveCity") int arriveCity
+	public Flight(int id,
+				  LocalDateTime departTime,
+				  int seatsAvailable,
+				  float price,
+				  int departCity,
+				  int arriveCity
 				) 
 		{
 			this.id = id;

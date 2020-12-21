@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -38,8 +39,9 @@ public class AirportDaoImpl implements AirportDao {
 	}
 
 	
+	//ADD FLIGHT
 	public int insertFlight(int id, Flight flight) {
-		flights.add(id, flight);
+		flightRepo.save(flight);
 		return 0;
 	}
 
@@ -51,9 +53,16 @@ public class AirportDaoImpl implements AirportDao {
 
 
 	@Override
-	public int insertFlight(Flight flight) {
+	public String insertFlight(Flight flight) {
 		flightRepo.save(flight);
-		return 0;
+		return "saved";
+	}
+
+
+	@Override
+	public Flight getFlightById(int flightId) {
+		// TODO Auto-generated method stub
+		return flightRepo.findById(flightId).get();
 	}
 
 }

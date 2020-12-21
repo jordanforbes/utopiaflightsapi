@@ -23,7 +23,7 @@ public class LocalDateDeserializer extends JsonDeserializer<LocalDate>{
 			throws IOException, JsonProcessingException {
 		
 		//custom deserializer
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("required format");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		
 		LocalDate localDate = null;
 		localDate = LocalDate.parse(p.getText(), formatter);

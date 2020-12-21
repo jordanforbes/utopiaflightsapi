@@ -1,4 +1,4 @@
-package com.start.flights.utopiaflightsapi;
+package com.start.flights.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

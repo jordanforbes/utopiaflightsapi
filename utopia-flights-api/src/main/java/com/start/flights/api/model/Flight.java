@@ -1,28 +1,56 @@
 /**
  * 
  */
-package com.start.flights.model;
+package com.start.flights.api.model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author Jordf
  *
  */
+
+@Entity
+@Table(name="tbl_flight")
 public class Flight {
 	
-	private final UUID id;
-	private LocalDateTime departTime;
-	private int seatsAvailable;
-	private float price;
-	private final int departCity;
-	private final int arriveCity;
 	
-	public Flight(@JsonProperty("id") UUID id,
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private  int id;
+	
+	//converts sql DATETIME to Java LocalDateTime
+	@Column(name="DEPARTTIME")
+	@JsonDeserialize(using=LocalDateDeserializer.class)
+	private LocalDateTime departTime;
+	
+	@Column(name="SEATSAVAILABLE")
+	private int seatsAvailable;
+	
+	@Column(name="PRICE")
+	private float price;
+	
+	@Column(name="DEPARTCITY")
+	private int departCity;
+	
+	@Column(name="ARRIVECITY")
+	private int arriveCity;
+	
+	public Flight() {
+		super();
+	}
+	
+	public Flight(@JsonProperty("id") int id,
 				  @JsonProperty("departTime") LocalDateTime departTime,
 				  @JsonProperty("seatsAvailable") int seatsAvailable,
 				  @JsonProperty("price") float price,
@@ -62,16 +90,28 @@ public class Flight {
 	}
 
 	//final properties
-	public UUID getId() {
+	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getDepartCity() {
 		return departCity;
 	}
+	
+	public void setDepartCity(int departCity) {
+		this.departCity = departCity;
+	}
 
 	public int getArriveCity() {
 		return arriveCity;
+	}
+	
+	public void setArriveCity(int arriveCity) {
+		this.arriveCity = arriveCity;
 	}
 
 	
